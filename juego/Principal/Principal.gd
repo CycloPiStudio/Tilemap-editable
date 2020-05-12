@@ -5,9 +5,11 @@ extends Control
 onready var tilemap : TileMap 
 onready var tileset : TileSet = preload("res://juego/tileset/tileset-escenario.tres")
 onready var personaje : KinematicBody2D = preload("res://juego/personaje/Player_01.tscn").instance()
+onready var enemigo_01 = preload("res://juego/Enemigos/Enemigo_01/Enemigo_01.tscn").instance()
 #= $TileMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_node("/root/Principal").add_child(enemigo_01)
 	tilemap = TileMap.new ()
 	tilemap.MODE_SQUARE
 #	tilemap.cell_size
@@ -16,11 +18,15 @@ func _ready():
 #	tileset = TileSet.new()
 	tilemap.set_tileset(tileset) 
 	get_node("/root/Principal").add_child(tilemap)
-
+	var tileMapName = get_node("/root/Principal").get_child(0).name
+	get_node("/root/Principal/" + str(tileMapName)).set_name("escenario")
 	for i in 20:
-		tilemap.set_cell(i, 5, 1)
+		tilemap.set_cell(i, 7, 1)
 	
 	get_node("/root/Principal").add_child(personaje)
+
+	
+
 
 func _input(event):
 	var lado = 32
