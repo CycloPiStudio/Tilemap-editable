@@ -5,33 +5,39 @@ onready var nuevaAltura
 export var velocidadSubida = 50
 
 var playerPosX
+var playerPosY
+var player
 
-
-func _ready():
-#	altura = (get_viewport().size.y)
-	pass 
 
 
 func _process(_delta):
-	playerPosX = get_node("/root/Principal/Player").get_position().x
-	aumentarNivel()
-	get_node(".").set_position(Vector2(playerPosX, nuevaAltura))
-	get_node("Area2D/CollisionShape2D").shape.extents = Vector2((get_viewport().size.x/2)+50,10)
-	cartelAltura()
-#	if get_viewport().size.y - nuevaAltura == 100:
-#		cartelAltura()
-#	if get_viewport().size.y - nuevaAltura == 200:
-#		cartelAltura()
-	
+	aumentarAltura()
+	posicionEnemigo()
+	quitarVida()
 	
 	pass
-func cartelAltura():
-	get_node("Line2D").set_point_position(0, Vector2(-get_viewport().size.x, 0))
-	get_node("Line2D").set_point_position(1, Vector2(get_viewport().size.x, 0))
-	get_node("Line2D/Label").set_text(str(get_viewport().size.y - nuevaAltura))
-
-func aumentarNivel():
 	
+
+func posicionEnemigo():
+	playerPosX = get_node("/root/Principal/Player").get_position().x
+	playerPosY = get_node("/root/Principal/Player").get_position().y
+	get_node(".").set_position(Vector2(playerPosX, nuevaAltura))
+
+
+func quitarVida():
+	player = get_node("/root/Principal/Player")
+	
+	if playerPosY > nuevaAltura:
+#		get_node("Timer").start()	
+#		if 
+		player.quitarVida()
+#		print ("muere" +str(nuevaAltura))
+#		print ("altura player: " + str(playerPosY))
+#		print ("altura enemigo: " + str(nuevaAltura ))
+		pass
+
+
+func aumentarAltura():
 	var tiempo = int(OS.get_ticks_msec())/velocidadSubida
 	nuevaAltura = altura - tiempo
 	
@@ -39,17 +45,7 @@ func aumentarNivel():
 #	print("tiempo: " + str(tiempo))
 #	print ("altura: " + str(altura))
 #	print ("nueva altura: " + str(nuevaAltura))
-#	print (get_node("/root/Principal/Player").get_position().y)
 
 
-func _on_Area2D_body_entered(body):
-	print ("entra el " + str(body.name))
-	if body.get_name() == "Player":
-		pass
-	pass # Replace with function body.
-
-func _on_Area2D_body_exited(body):
-	print ("sale el " + str(body.name))
-	pass # Replace with function body.
 
 

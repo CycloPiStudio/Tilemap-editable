@@ -9,7 +9,8 @@ export var move_speed := 250
 export var jump_force := 500
 export var gravity := 900
 export var slope_slide_threshold := 50.0
-var vidas_personaje = 3
+#var vidas_personaje = 3
+var vida = 100
 var velocity := Vector2()
 #var conesion_anima_fin
 #var nodoprincipal
@@ -17,6 +18,7 @@ func _ready():
 #	nodoprincipal = get_tree().get_root().get_node("Principal")
 	pass
 func _physics_process(delta: float) -> void:
+	
 	var direction_x := Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.x = direction_x * move_speed
 #	velocity.x = analog_velocity.x* move_speed
@@ -43,6 +45,13 @@ func _physics_process(delta: float) -> void:
 #		activar_desactivar_colision()
 	
 	update_animation(velocity)
+
+func quitarVida():
+	print (int(OS.get_ticks_msec()/1000))
+	vida = vida - 1
+	print(vida)
+
+
 
 func update_animation(velocity: Vector2) -> void:
 #	var animation := "idle"
