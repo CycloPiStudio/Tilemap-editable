@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://juego/Enemigos/Enemigo_01/Enemigo_01.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://juego/Enemigos/Enemigo_01/Timer/Timer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://juego/Enemigos/Enemigo_01/imgs/mar-01.png" type="Texture" id=2]
+[ext_resource path="res://juego/Enemigos/Enemigo_01/imgs/mar-02.png" type="Texture" id=3]
+[ext_resource path="res://juego/Enemigos/Enemigo_01/imgs/mar-03.png" type="Texture" id=4]
+[ext_resource path="res://juego/Enemigos/Enemigo_01/Timer/Timer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -16,6 +18,9 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2.62851, 1978.42 )
+scale = Vector2( 1.50047, 0.989211 )
 frames = SubResource( 1 )
+playing = true
 
-[node name="Timer" parent="." instance=ExtResource( 3 )]
+[node name="Timer" parent="." instance=ExtResource( 5 )]
