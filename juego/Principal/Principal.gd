@@ -24,7 +24,7 @@ func _ready():
 	get_node("/root/Principal").add_child(tilemap)
 	var tileMapName = get_node("/root/Principal").get_child(1).name
 	get_node("/root/Principal/" + str(tileMapName)).set_name("escenario")
-	for i in 20:
+	for i in 200:
 		tilemap.set_cell(i, 7, 1)
 	
 
