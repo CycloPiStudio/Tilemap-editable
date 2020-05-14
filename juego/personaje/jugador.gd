@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+
+
 onready var sprite : AnimatedSprite = $AnimatedSprite
 #onready var animation_player : AnimationPlayer = $AnimationPlayer
 #onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer2D
@@ -10,6 +12,7 @@ export var jump_force := 500
 export var gravity := 900
 export var slope_slide_threshold := 50.0
 var vidas_personaje = 3
+var vida = 100
 var velocity := Vector2()
 #var conesion_anima_fin
 #var nodoprincipal
@@ -17,6 +20,7 @@ func _ready():
 #	nodoprincipal = get_tree().get_root().get_node("Principal")
 	pass
 func _physics_process(delta: float) -> void:
+	
 	var direction_x := Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.x = direction_x * move_speed
 #	velocity.x = analog_velocity.x* move_speed
@@ -43,6 +47,21 @@ func _physics_process(delta: float) -> void:
 #		activar_desactivar_colision()
 	
 	update_animation(velocity)
+
+func quitarVida():
+	var menosVida = 10
+	vida = vida - menosVida
+	print(vida)
+	if vida <= 0:
+		vidas_personaje -= 1
+		print("una vida menos")
+		get_parent().queue_free()
+
+		if vidas_personaje <= 0:
+			print("se acabo la partida")
+	
+
+
 
 func update_animation(velocity: Vector2) -> void:
 #	var animation := "idle"
