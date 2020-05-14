@@ -22,7 +22,7 @@ func _ready():
 #	tileset = TileSet.new()
 	tilemap.set_tileset(tileset) 
 	get_node("/root/Principal").add_child(tilemap)
-	var tileMapName = get_node("/root/Principal").get_child(1).name
+	var tileMapName = get_node("/root/Principal").get_child(3).name
 	get_node("/root/Principal/" + str(tileMapName)).set_name("escenario")
 	for i in 20:
 		tilemap.set_cell(i, 7, 1)
